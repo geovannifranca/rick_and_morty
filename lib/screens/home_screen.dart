@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:rick_and_morty/store/home_store.dart';
+import 'package:rick_and_morty/widgets/character_grid_view.dart';
+import 'package:rick_and_morty/widgets/character_list_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,26 +13,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final homeStore = GetIt.I.get<HomeStore>();
+
+  @override
+  void initState() {
+    super.initState();
+    homeStore.loadCharacter();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Rick and Morty',
                 style: TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Procure pelo seu personagem',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
-              TextField(
+              const SizedBox(height: 16),
+              const TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -38,10 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   hintText: 'Nome ou identificador',
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Align(
                 alignment: Alignment.topRight,
-                child: Icon(Icons.grid_view, size: 36),
+                child: IconButton(
+                  onPressed: homeStore.changeLayout,
+                  icon: Observer(
+                    builder: (context) {
+                      return homeStore.clicked
+                          ? const Icon(Icons.list, size: 36)
+                          : const Icon(Icons.grid_view, size: 36);
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Observer(
+                  builder: (context) {
+                    if (homeStore.isLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    return homeStore.clicked
+                        ? CharacterGridView(characterList: homeStore.character)
+                        : CharacterListView(characterList: homeStore.character);
+                  },
+                ),
               ),
             ],
           ),
