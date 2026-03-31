@@ -40,8 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                onChanged: homeStore.setSearch,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
@@ -73,8 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
 
                     return homeStore.clicked
-                        ? CharacterGridView(characterList: homeStore.character)
-                        : CharacterListView(characterList: homeStore.character);
+                        ? CharacterGridView(
+                            characterList: homeStore.filteredCharacter,
+                          )
+                        : CharacterListView(
+                            characterList: homeStore.filteredCharacter,
+                          );
                   },
                 ),
               ),

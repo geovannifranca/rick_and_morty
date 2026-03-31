@@ -29,6 +29,20 @@ abstract class HomeStoreBase with Store {
 
   String? get search => _search;
 
+  @computed
+  List<Character> get filteredCharacter {
+    if (_search == null || _search!.isEmpty) return _character.toList();
+
+    final query = _search!.toLowerCase();
+    final idQuery = int.tryParse(_search!);
+
+    return _character.where((character) {
+      final matchesName = character.name.toLowerCase().contains(query);
+      final matchesId = idQuery != null && character.id == idQuery;
+      return matchesName || matchesId;
+    }).toList();
+  }
+
   @action
   void changeLayout() {
     clicked = !clicked;

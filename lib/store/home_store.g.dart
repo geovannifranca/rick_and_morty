@@ -9,6 +9,15 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HomeStore on HomeStoreBase, Store {
+  Computed<List<Character>>? _$filteredCharacterComputed;
+
+  @override
+  List<Character> get filteredCharacter =>
+      (_$filteredCharacterComputed ??= Computed<List<Character>>(
+        () => super.filteredCharacter,
+        name: 'HomeStoreBase.filteredCharacter',
+      )).value;
+
   late final _$_isLoadingAtom = Atom(
     name: 'HomeStoreBase._isLoading',
     context: context,
@@ -135,7 +144,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-clicked: ${clicked}
+clicked: ${clicked},
+filteredCharacter: ${filteredCharacter}
     ''';
   }
 }
