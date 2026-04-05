@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rick_and_morty/models/character.model.dart';
+import 'package:rick_and_morty/models/character_detail.model.dart';
 import 'package:rick_and_morty/models/character_response.model.dart';
 import 'package:rick_and_morty/services/rick_and_morty.api.dart';
 
@@ -71,5 +72,10 @@ abstract class HomeStoreBase with Store {
   void updateCharacterColor({required int id, required Color color}) {
     final index = _character.indexWhere((element) => element.id == id);
     _character[index] = _character[index].copyWith(color: color);
+  }
+
+  @action
+  Future<CharacterDetail> getCharacterDatail(int id) async {
+    return await _rickAndMortyService.getDetail(id);
   }
 }

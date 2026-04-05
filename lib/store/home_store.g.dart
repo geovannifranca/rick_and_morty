@@ -100,6 +100,18 @@ mixin _$HomeStore on HomeStoreBase, Store {
     return _$loadCharacterAsyncAction.run(() => super.loadCharacter());
   }
 
+  late final _$getCharacterDatailAsyncAction = AsyncAction(
+    'HomeStoreBase.getCharacterDatail',
+    context: context,
+  );
+
+  @override
+  Future<CharacterDetail> getCharacterDatail(int id) {
+    return _$getCharacterDatailAsyncAction.run(
+      () => super.getCharacterDatail(id),
+    );
+  }
+
   late final _$HomeStoreBaseActionController = ActionController(
     name: 'HomeStoreBase',
     context: context,

@@ -9,11 +9,21 @@ class RickAndMortyService {
 
   Future<CharacterResponse> getAllCharacter() async {
     final response = await dio.get('/character');
+
+    if (response.statusCode != 200) {
+      throw Exception("Erro ao buscar os dados");
+    }
+
     return CharacterResponse.fromMap(response.data);
   }
 
   Future<CharacterDetail> getDetail(int id) async {
     final response = await dio.get('/character/$id');
+
+    if (response.statusCode != 200) {
+      throw Exception("Erro ao buscar os dados");
+    }
+
     return CharacterDetail.fromMap(response.data);
   }
 }
