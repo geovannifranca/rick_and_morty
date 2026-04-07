@@ -57,7 +57,10 @@ class _DetailScreenState extends State<DetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text(
-                              "${widget.character.name.toUpperCase()} | #${widget.character.id} ",
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              "${widget.character.name.toUpperCase()} | #${widget.character.id}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -65,15 +68,49 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Wrap(
+                              alignment: WrapAlignment.center,
+                              spacing: 18,
                               children: [
-                                Chip(label: Text(widget.character.status)),
-                                Chip(label: Text(widget.character.species)),
-                                Chip(label: Text(widget.character.gender)),
+                                Chip(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  label: Text(
+                                    widget.character.status,
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                  backgroundColor: widget.character.color,
+                                ),
+                                Chip(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  label: Text(
+                                    widget.character.species,
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                  backgroundColor: widget.character.color,
+                                ),
+                                Chip(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  label: Text(
+                                    widget.character.gender,
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                  backgroundColor: widget.character.color,
+                                ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 34),
                             Text(
                               'Última localização conhecida:\n ${detailStore.characterDetail!.origin.name}',
                             ),

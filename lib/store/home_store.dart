@@ -12,6 +12,8 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   final RickAndMortyService _rickAndMortyService = RickAndMortyService();
 
+  int _page = 1;
+
   @observable
   bool _isLoading = false;
 
@@ -57,8 +59,11 @@ abstract class HomeStoreBase with Store {
     _isLoading = true;
 
     try {
-      CharacterResponse response = await _rickAndMortyService.getAllCharacter();
+      CharacterResponse response = await _rickAndMortyService.getAllCharacter(
+        page: _page,
+      );
       _character.addAll(response.results);
+      _page++;
     } catch (e) {
       // ignore: avoid_print
       print('Erro ao carregar: $e');

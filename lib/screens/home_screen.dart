@@ -14,11 +14,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeStore = GetIt.I.get<HomeStore>();
+  final _scrollController = ScrollController();
+
+  void scrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      homeStore.loadCharacter();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(scrollListener);
     homeStore.loadCharacter();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -76,9 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     return homeStore.clicked
                         ? CharacterGridView(
                             characterList: homeStore.filteredCharacter,
+                            scrollController: _scrollController,
                           )
                         : CharacterListView(
                             characterList: homeStore.filteredCharacter,
+                            scrollController: _scrollController,
                           );
                   },
                 ),
