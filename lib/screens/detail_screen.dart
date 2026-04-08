@@ -35,6 +35,7 @@ class _DetailScreenState extends State<DetailScreen> {
               background: Hero(
                 tag: Key(widget.character.id.toString()),
                 child: CachedNetworkImage(
+                  key: const Key("imageDetails"),
                   imageUrl: widget.character.imageUrl,
                   fit: BoxFit.cover,
                 ),
@@ -111,16 +112,55 @@ class _DetailScreenState extends State<DetailScreen> {
                               ],
                             ),
                             const SizedBox(height: 34),
-                            Text(
-                              'Última localização conhecida:\n ${detailStore.characterDetail!.origin.name}',
+                            RichText(
+                              text: TextSpan(
+                                style: const TextStyle(fontSize: 18),
+                                text: 'Última localização conhecida:',
+                                children: [
+                                  TextSpan(
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    text:
+                                        '\n ${detailStore.characterDetail!.origin.name}',
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Local de origem:\n ${detailStore.characterDetail!.location.name}',
+                            const SizedBox(height: 14),
+                            RichText(
+                              text: TextSpan(
+                                style: const TextStyle(fontSize: 18),
+                                text: 'Local de origem:',
+                                children: [
+                                  TextSpan(
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    text:
+                                        '\n ${detailStore.characterDetail!.location.name}',
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Quantidades de vezes aparecidas:\n ${detailStore.characterDetail!.episode.length} episódios',
+                            const SizedBox(height: 14),
+                            RichText(
+                              text: TextSpan(
+                                style: const TextStyle(fontSize: 18),
+                                text: 'Quantidades de vezes que apareceu:',
+                                children: [
+                                  TextSpan(
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    text:
+                                        '\n ${detailStore.characterDetail!.episode.length} episódios',
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

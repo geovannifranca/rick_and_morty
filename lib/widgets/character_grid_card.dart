@@ -50,6 +50,7 @@ class _CharacterGridCardState extends State<CharacterGridCard> {
         );
       },
       child: Card(
+        key: const Key("gridCard"),
         color: widget.character.color,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -65,6 +66,7 @@ class _CharacterGridCardState extends State<CharacterGridCard> {
                   child: Hero(
                     tag: Key(widget.character.id.toString()),
                     child: CachedNetworkImage(
+                      key: const Key("imageGridCard"),
                       imageUrl: widget.character.imageUrl,
                       width: 110,
                     ),

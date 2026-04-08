@@ -17,6 +17,7 @@ class CharacterListView extends StatelessWidget {
     return Observer(
       builder: (context) {
         return ListView.separated(
+          key: const Key("listView"),
           controller: _scrollController,
           itemBuilder: (context, index) {
             if (index < characterList!.length) {

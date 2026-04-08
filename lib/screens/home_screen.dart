@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16),
               TextField(
+                key: const Key("Filtro"),
                 onChanged: homeStore.setSearch,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(

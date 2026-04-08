@@ -17,6 +17,7 @@ class CharacterGridView extends StatelessWidget {
     return Observer(
       builder: (context) {
         return GridView.builder(
+          key: const Key("gridView"),
           itemCount: characterList!.length + 1,
           controller: _scrollController,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
