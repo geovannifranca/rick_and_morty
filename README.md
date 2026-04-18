@@ -2,6 +2,9 @@
 
 Este repositório é o desafio final do módulo 6 (Animações e integração com API) da Growdev, apicação Flutter moderna e performática que explora o vasto e divertido universo de Rick and Morty, consumindo a [Rick and Morty API](https://rickandmortyapi.com/). Este projeto demonstra as melhores práticas de desenvolvimento mobile, com foco em reatividade, performance e uma experiência de usuário imersiva.
 
+<img width="294" height="639" alt="img-2" src="https://github.com/user-attachments/assets/90e05c91-ed82-4503-b6b8-4fd860935cfe" />
+
+
 ## 🚀 Funcionalidades
 
 *   **Listagem Dinâmica de Personagens**: Visualize personagens em layouts de lista ou grade, com informações essenciais como nome, espécie e status.
